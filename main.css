@@ -6,6 +6,6 @@ td{
     color:Green;
     }
 a:link {text-decoration: none; color: Green;}
-a:visited {text-decoration: none; color: none;}
-a:active {text-decoration: none; color: none;}
+a:visited {text-decoration: none; color: Green;}
+a:active {text-decoration: none; color: Green;}
 a:hover {text-decoration: underline; color: Red;}
