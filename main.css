@@ -5,3 +5,7 @@ body{
 td{
     color:Green;
     }
+a:link {text-decoration: none; color: none;}
+a:visited {text-decoration: none; color: none;}
+a:active {text-decoration: none; color: Red;}
+a:hover {text-decoration: underline; color: none;}
