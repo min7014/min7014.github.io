@@ -1,103 +1,280 @@
-<style>
-  body {
-    max-width: 1080px;
-    margin: 0 auto;
-    padding: 1.5rem 1rem 3rem;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    /* 파스텔 블루-민트 그라데이션 배경 */
-    background: linear-gradient(135deg, #e3f2fd, #e8f5e9);
-  }
-  header {
-    text-align: center;
-    margin-bottom: 1.5rem;
-  }
-  header h1 {
-    font-size: 1.6rem;
-    margin-bottom: 0.5rem;
-    color: #0d47a1; /* 진한 네이비 블루 */
-  }
-  header p {
-    margin: 0.25rem 0;
-    color: #455a64; /* 회색빛 남색 */
-    font-size: 0.95rem;
-  }
-  .search-box {
-    margin: 1rem 0 1.5rem;
-    text-align: center;
-  }
-  .search-box input {
-    width: 90%;
-    max-width: 480px;
-    padding: 0.5rem 0.75rem;
-    font-size: 0.95rem;
-    border-radius: 999px;
-    border: 1px solid #90caf9;
-    background-color: #ffffffdd;
-    box-shadow: 0 1px 3px rgba(13, 71, 161, 0.12);
-  }
-  .search-box input:focus {
-    outline: none;
-    border-color: #42a5f5;  /* 파란 포인트 */
-    box-shadow: 0 0 0 2px rgba(66, 165, 245, 0.25);
-  }
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1rem;
-    margin-bottom: 2rem;
-  }
-  .card {
-    background: #ffffff;
-    border-radius: 12px;
-    padding: 0.9rem 1rem;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease;
-    border-top: 4px solid #42a5f5; /* 카드 상단 포인트 라인 */
-  }
-  .card:nth-child(3n+1) { border-top-color: #42a5f5; } /* 파랑 */
-  .card:nth-child(3n+2) { border-top-color: #26a69a; } /* 민트 */
-  .card:nth-child(3n+3) { border-top-color: #ffb74d; } /* 주황 */
-  .card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 14px rgba(0,0,0,0.16);
-    background-color: #f9fbff;
-  }
-  .card h2 {
-    font-size: 1.05rem;
-    margin: 0 0 0.35rem;
-    color: #1a237e; /* 진한 남색 */
-  }
-  .card p {
-    font-size: 0.9rem;
-    margin: 0 0 0.5rem;
-    color: #546e7a;
-  }
-  .card a {
-    display: inline-block;
-    font-size: 0.88rem;
-    color: #1565c0;
-    text-decoration: none;
-    margin-right: 0.4rem;
-    padding: 0.2rem 0.5rem;
-    border-radius: 999px;
-    background-color: #e3f2fd;
-  }
-  .card a:hover {
-    background-color: #bbdefb;
-    text-decoration: none;
-  }
-  section.fb-section {
-    margin-top: 2rem;
-  }
-  section.fb-section h2 {
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
-    color: #0d47a1;
-  }
-  footer {
-    margin-top: 2rem;
-    font-size: 0.8rem;
-    color: #607d8b;
-    text-align: center;
-  }
-</style>
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>민은기 선생님의 수학자료실 (Update 20250907)</title>
+
+  <!-- 반응형 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- 파비콘 -->
+  <link rel="shortcut icon" type="image/png" href="https://min7014.github.io/2019021102.png">
+
+  <!-- 기본 CSS (기존 main.css) -->
+  <style>
+    @import url("https://min7014.github.io/main.css");
+  </style>
+
+  <!-- MathJax -->
+  <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: { inlineMath: [["$","$"],["\\(","\\)"]] }
+    });
+    if (self.name != 'reload') { self.name = 'reload'; } else self.name = '';
+  </script>
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-146434167-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'UA-146434167-1');
+  </script>
+
+  <!-- Facebook SDK -->
+  <div id="fb-root"></div>
+  <script>
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v2.12";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, "script", "facebook-jssdk"));
+  </script>
+
+  <!-- 이 페이지 전용 색감/레이아웃 -->
+  <style>
+    body {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem 3rem;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #e3f2fd, #e8f5e9);
+    }
+    header {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    header h1 {
+      font-size: 1.6rem;
+      margin-bottom: 0.5rem;
+      color: #0d47a1;
+    }
+    header p {
+      margin: 0.25rem 0;
+      color: #455a64;
+      font-size: 0.95rem;
+    }
+    .search-box {
+      margin: 1rem 0 1.5rem;
+      text-align: center;
+    }
+    .search-box input {
+      width: 90%;
+      max-width: 480px;
+      padding: 0.5rem 0.75rem;
+      font-size: 0.95rem;
+      border-radius: 999px;
+      border: 1px solid #90caf9;
+      background-color: #ffffffdd;
+      box-shadow: 0 1px 3px rgba(13, 71, 161, 0.12);
+    }
+    .search-box input:focus {
+      outline: none;
+      border-color: #42a5f5;
+      box-shadow: 0 0 0 2px rgba(66, 165, 245, 0.25);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .card {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 0.9rem 1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease;
+      border-top: 4px solid #42a5f5;
+    }
+    .card:nth-child(3n+1) { border-top-color: #42a5f5; }
+    .card:nth-child(3n+2) { border-top-color: #26a69a; }
+    .card:nth-child(3n+3) { border-top-color: #ffb74d; }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.16);
+      background-color: #f9fbff;
+    }
+    .card h2 {
+      font-size: 1.05rem;
+      margin: 0 0 0.35rem;
+      color: #1a237e;
+    }
+    .card p {
+      font-size: 0.9rem;
+      margin: 0 0 0.5rem;
+      color: #546e7a;
+    }
+    .card a {
+      display: inline-block;
+      font-size: 0.88rem;
+      color: #1565c0;
+      text-decoration: none;
+      margin-right: 0.4rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 999px;
+      background-color: #e3f2fd;
+    }
+    .card a:hover {
+      background-color: #bbdefb;
+      text-decoration: none;
+    }
+    section.fb-section {
+      margin-top: 2rem;
+    }
+    section.fb-section h2 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      color: #0d47a1;
+    }
+    footer {
+      margin-top: 2rem;
+      font-size: 0.8rem;
+      color: #607d8b;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>민은기 선생님의 수학자료실</h1>
+    <p>Library of Teacher Min Eun Gi's Mathematical Resource</p>
+    <p>최근 업데이트: 2025-09-07</p>
+  </header>
+
+  <!-- 검색 -->
+  <div class="search-box">
+    <input id="search" type="text" placeholder="자료 제목 또는 설명으로 검색 (예: GeoGebra, 2024학년도, 작도)">
+  </div>
+
+  <main>
+    <!-- 원래 있던 링크들을 카드로 변환 -->
+    <section id="cards" class="grid">
+      <article class="card" data-tags="만든순서 제작 created order 목록">
+        <h2>만든순서별</h2>
+        <p>자료를 만든 순서대로 정리한 전체 목록.</p>
+        <a href="https://min7014.github.io/2019021101.html" target="_blank">열기</a>
+      </article>
+
+      <article class="card" data-tags="내용 주제 topic arrange by content">
+        <h2>내용 순으로 배열</h2>
+        <p>단원·주제별로 정리한 수학 자료 모음.</p>
+        <a href="https://min7014.github.io/2019080802.html" target="_blank">열기</a>
+      </article>
+
+      <article class="card" data-tags="기타 other materials 보충">
+        <h2>기타자료</h2>
+        <p>수업에 도움이 되는 기타 수학 자료.</p>
+        <a href="https://min7014.github.io/math20250129002.html" target="_blank">열기</a>
+      </article>
+
+      <article class="card" data-tags="GeoGebra 지오지브라 동적 기하">
+        <h2>GeoGebra 수업자료</h2>
+        <p>GeoGebra로 만든 민은기 선생님의 수학수업 자료.</p>
+        <a href="https://min7014.github.io/math20220222004.html" target="_blank">링크 모음</a>
+        <a href="https://www.geogebra.org/u/min7014" target="_blank">GeoGebra Tube</a>
+      </article>
+
+      <article class="card" data-tags="AlgeoMath 알지오매스 기하 애니메이션">
+        <h2>AlgeoMath 수업자료</h2>
+        <p>AlgeoMath로 제작한 수학수업용 학습자료.</p>
+        <a href="https://min7014.github.io/math20190921002.html" target="_blank">링크 모음</a>
+        <a href="http://me2.do/5qso0BiT#toolbar=0&view=Fit&scrollbar=0" target="_blank">AlgeoMath</a>
+      </article>
+
+      <article class="card" data-tags="2024학년도 수업 정리">
+        <h2>2024학년도 수학수업</h2>
+        <p>2024학년도 수업에 사용한 자료와 안내.</p>
+        <a href="https://min7014.github.io/math20240225002.html" target="_blank">열기</a>
+      </article>
+
+      <article class="card" data-tags="작도 construction 기본기 기하">
+        <h2>작도</h2>
+        <p>자와 컴퍼스로 하는 작도, GeoGebra 작도 등 정리.</p>
+        <a href="https://min7014.github.io/2019081603.html" target="_blank">수업 페이지</a>
+        <a href="https://min7014.github.io/math20191101001.html" target="_blank">고유주소</a>
+      </article>
+
+      <article class="card" data-tags="강의 lecture 영상 설명">
+        <h2>강의</h2>
+        <p>강의 형식의 수학 자료 모음.</p>
+        <a href="https://min7014.github.io/math20191130002.html" target="_blank">열기</a>
+      </article>
+
+      <article class="card" data-tags="학년도별 연도별 수업 year lessons">
+        <h2>학년도별 수학수업</h2>
+        <p>각 학년도별 수업 자료를 모아둔 페이지.</p>
+        <a href="https://min7014.github.io/2019030303.html" target="_blank">수업 페이지</a>
+        <a href="https://min7014.github.io/math20191130008.html" target="_blank">고유주소</a>
+      </article>
+
+      <article class="card" data-tags="알림 공지 notice">
+        <h2>알림</h2>
+        <p>수업 및 사이트 관련 공지사항.</p>
+        <a href="https://min7014.github.io/notice.html" target="_blank">알림 보기</a>
+        <a href="https://min7014.github.io/math20191130011.html" target="_blank">고유주소</a>
+      </article>
+
+      <article class="card" data-tags="즐겨찾기 favorites 자주쓰는 링크">
+        <h2>즐겨찾기</h2>
+        <p>수업 중 자주 사용하는 외부 사이트 링크.</p>
+        <a href="https://min7014.github.io/math20200102003.html" target="_blank">열기</a>
+      </article>
+    </section>
+
+    <!-- Facebook -->
+    <section class="fb-section">
+      <h2>페이스북 수학자료실 소식</h2>
+      <div class="fb-page"
+           data-href="https://www.facebook.com/mineungimath/"
+           data-tabs="timeline"
+           data-width="600"
+           data-height="2000"
+           data-small-header="true"
+           data-adapt-container-width="true"
+           data-hide-cover="false"
+           data-show-facepile="false">
+        <blockquote cite="https://www.facebook.com/mineungimath/" class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/mineungimath/">민은기 선생님의 수학자료실</a>
+        </blockquote>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 민은기 선생님의 수학자료실</p>
+  </footer>
+
+  <!-- 카드 검색 기능 -->
+  <script>
+    (function() {
+      var input = document.getElementById("search");
+      var cards = document.querySelectorAll("#cards .card");
+      if (!input || !cards.length) return;
+
+      input.addEventListener("input", function() {
+        var q = this.value.toLowerCase();
+        cards.forEach(function(card) {
+          var text = (card.innerText + " " + (card.getAttribute("data-tags") || "")).toLowerCase();
+          card.style.display = text.indexOf(q) > -1 ? "" : "none";
+        });
+      });
+    }());
+  </script>
+</body>
+</html>
